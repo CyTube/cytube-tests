@@ -1,0 +1,21 @@
+{
+  "name": "cytube-tests",
+  "version": "0.0.1",
+  "description": "Blackbox tests for CyTube",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint lib test",
+    "pretest": "npm run lint",
+    "test": "mocha -s 10000"
+  },
+  "author": "Calvin Montgomery",
+  "license": "MIT",
+  "dependencies": {
+    "@calzoneman/jsli": "^2.0.1",
+    "cheerio": "^1.0.0-rc.2",
+    "mocha": "^5.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0"
+  }
+}

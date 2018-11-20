@@ -1,0 +1,34 @@
+env:
+  es6: true
+  mocha: true
+  node: true
+extends: 'eslint:recommended'
+parserOptions:
+  sourceType: module
+  ecmaVersion: 2017 # For async/await
+rules:
+  brace-style:
+    - error
+    - 1tbs
+    - allowSingleLine: true
+  indent:
+    - error
+    - 4
+    - SwitchCase: 1
+  linebreak-style:
+    - error
+    - unix
+  no-control-regex:
+    - off
+  no-trailing-spaces:
+    - error
+  no-unused-vars:
+    - error
+    - argsIgnorePattern: ^_
+      varsIgnorePattern: ^_|^Promise$
+  semi:
+    - error
+    - always
+  quotes:
+    - error
+    - single
