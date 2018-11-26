@@ -152,4 +152,73 @@ describe('AccountDeleteTest', () => {
             );
         }
     });
+
+    it('doesn\'t allow accessing the profile page for an account pending deletion', async () => {
+        await client.login(username, password);
+
+        let page = await client.get('/account/delete');
+        assert.strictEqual(page.statusCode, 200, 'Expected GET to return 200');
+
+        let csrfToken = client.extractCsrfToken(page.body);
+        let formData = {
+            password,
+            confirmed: true,
+            _csrf: csrfToken
+        };
+
+        let result = await client.post('/account/delete', formData);
+        assert.strictEqual(result.statusCode, 200);
+
+        let profilePage = await client.get('/account/profile');
+        assert(
+            profilePage.body.match(/Authorization Required/),
+            'Expected error message due to not being logged in'
+        );
+    });
+
+    it('doesn\'t allow accessing the account edit page for an account pending deletion', async () => {
+        await client.login(username, password);
+
+        let page = await client.get('/account/delete');
+        assert.strictEqual(page.statusCode, 200, 'Expected GET to return 200');
+
+        let csrfToken = client.extractCsrfToken(page.body);
+        let formData = {
+            password,
+            confirmed: true,
+            _csrf: csrfToken
+        };
+
+        let result = await client.post('/account/delete', formData);
+        assert.strictEqual(result.statusCode, 200);
+
+        let profilePage = await client.get('/account/edit');
+        assert(
+            profilePage.body.match(/Authorization Required/),
+            'Expected error message due to not being logged in'
+        );
+    });
+
+    it('doesn\'t allow accessing the my channels page for an account pending deletion', async () => {
+        await client.login(username, password);
+
+        let page = await client.get('/account/delete');
+        assert.strictEqual(page.statusCode, 200, 'Expected GET to return 200');
+
+        let csrfToken = client.extractCsrfToken(page.body);
+        let formData = {
+            password,
+            confirmed: true,
+            _csrf: csrfToken
+        };
+
+        let result = await client.post('/account/delete', formData);
+        assert.strictEqual(result.statusCode, 200);
+
+        let profilePage = await client.get('/account/channels');
+        assert(
+            profilePage.body.match(/Authorization Required/),
+            'Expected error message due to not being logged in'
+        );
+    });
 });
