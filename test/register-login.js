@@ -6,7 +6,7 @@ describe('RegisterLoginTest', () => {
     let client = new HTTPClient(process.env.HOST, parseInt(process.env.PORT, 10));
 
     it('registers a user and logs in as that user', async () => {
-        let name = `X${Date.now()}`;
+        let name = `U${Date.now()}`;
         let password = 'test';
 
         await client.register({ name, password });

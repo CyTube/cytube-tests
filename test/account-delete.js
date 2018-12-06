@@ -9,7 +9,7 @@ describe('AccountDeleteTest', () => {
 
     beforeEach(async () => {
         client = new HTTPClient(process.env.HOST, parseInt(process.env.PORT, 10));
-        username = `X${Date.now()}`;
+        username = `U${Date.now()}`;
         password = 'test';
 
         await client.register({ name: username, password });
@@ -104,7 +104,7 @@ describe('AccountDeleteTest', () => {
     it('rejects if channels are registered', async () => {
         await client.login(username, password);
 
-        let channel = `Z${Date.now()}`;
+        let channel = `C${Date.now()}`;
         await client.registerChannel(channel);
 
         let page = await client.get('/account/delete');
